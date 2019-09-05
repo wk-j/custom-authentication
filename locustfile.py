@@ -1,9 +1,10 @@
 from locust import HttpLocust, TaskSet, task
 
+
 class WebsiteTasks(TaskSet):
     def on_start(self):
         rest = self.client.get("/api/account/login/1234")
-        print(rest)
+        print(self.cookie())
 
     @task
     def get_computers(self):
@@ -13,6 +14,7 @@ class WebsiteTasks(TaskSet):
     @task
     def index(self):
         self.client.get("/weatherForecast")
+
 
 class WebsiteUser(HttpLocust):
     task_set = WebsiteTasks
