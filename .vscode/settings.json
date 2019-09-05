@@ -21,5 +21,6 @@
         "dist": true,
         "build": true,
         ".cache": true
-    }
+    },
+    "python.pythonPath": "/Users/wk/.local/share/virtualenvs/CustomAuthentication-itV0ty20/bin/python"
 }
