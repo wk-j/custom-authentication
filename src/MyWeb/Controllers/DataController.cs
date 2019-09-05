@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace MyWeb.Controllers {
     [Route("api/[controller]/[action]")]
@@ -8,9 +10,19 @@ namespace MyWeb.Controllers {
     [ApiController]
     public class DataController : ControllerBase {
 
+        private readonly ILogger<DataController> _logger;
+
+        public DataController(ILogger<DataController> logger) {
+            _logger = logger;
+        }
+
         [HttpGet]
         public dynamic[] GetComputers() {
-            var user = this.User.Identity.Name;
+            User.Claims.ToList().ForEach(x => {
+                _logger.LogInformation("claim --- {@x}", x);
+            });
+
+            var user = User.Identity.Name;
 
             return new[] {
                 new {
