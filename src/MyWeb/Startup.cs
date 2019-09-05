@@ -24,7 +24,11 @@ namespace MyWeb {
 
         public void ConfigureServices(IServiceCollection services) {
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
                 .AddCookie(options => {
                     options.Events.OnRedirectToLogin = context => {
                         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
