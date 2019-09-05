@@ -3,8 +3,7 @@ from locust import HttpLocust, TaskSet, task
 
 class WebsiteTasks(TaskSet):
     def on_start(self):
-        rest = self.client.get("/api/account/login/1234")
-        print(self.cookie())
+        self.client.get("/api/account/login/1234")
 
     @task
     def get_computers(self):
